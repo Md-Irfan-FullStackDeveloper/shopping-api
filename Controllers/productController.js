@@ -1,42 +1,54 @@
-const { ProductModel } = require("../Models/Product.model");
+const { JobModel } = require("../Models/Product.model");
 
-const addProduct = async (req, res) => {
-  const { title, priority, description, quantity} = req.body;
-  let productExists;
+const addJobs = async (req, res) => {
+  const {
+    company,
+    city,
+    location,
+    role,
+    level,
+    contract,
+    position,
+    language,
+  } = req.body;
+  let jobExists;
 
   try {
-    productExists = await ProductModel.findOne({title});
+    jobExists = await JobModel.find({ company: company, role: role });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "failed to add" });
   }
 
-  if (productExists) {
+  if (jobExists.length > 0) {
     return res.status(500).json({ msg: "Task already present" });
   }
 
-  const newProduct = new ProductModel({
-    title,
-    quantity,
-    priority,
-    description,
-    dateTime: new Date(),
-    bookmarked: false,
+  const newJob = new JobModel({
+    company,
+    postedAt: new Date(),
+    city,
+    location,
+    role,
+    level,
+    contract,
+    position,
+    language,
   });
 
   try {
-    await newProduct.save();
-    return res.status(200).json(newProduct);
+    await newJob.save();
+    return res.status(200).json(newJob);
   } catch (error) {
     console.log(error);
     return res.status(404).json(error);
   }
 };
 
-const getProduct = async (req, res) => {
+const getJobs = async (req, res) => {
   let data;
   try {
-    data = await ProductModel.find();
+    data = await JobModel.find();
   } catch (error) {
     console.log(error);
     return res.status(404).json(error);
@@ -49,6 +61,6 @@ const getProduct = async (req, res) => {
 };
 
 module.exports = {
-  getProduct,
-  addProduct,
+  getJobs,
+  addJobs,
 };

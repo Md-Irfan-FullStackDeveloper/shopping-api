@@ -1,11 +1,11 @@
-const {Router} = require('express')
-const { getProduct, addProduct } = require('../Controllers/productController')
+const { Router } = require("express");
+const { getJobs, addJobs } = require("../Controllers/productController");
 
-const productRouter = Router()
+const JobRouter = Router();
 
-productRouter.get('/', getProduct) 
-productRouter.post('/addProduct', addProduct)
+JobRouter.get("/", getJobs);
+JobRouter.post("/addJobs", addJobs);
 
 module.exports = {
-    productRouter
-}
+  JobRouter,
+};

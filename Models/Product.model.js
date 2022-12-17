@@ -1,32 +1,45 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
-  title: {
+const jobSchema = new mongoose.Schema({
+  company: {
     type: String,
     required: true,
   },
-  quantity: {
-    type: Number,
-    required: true,
+  postedAt: {
+    type: String,
   },
-  priority: {
+  city: {
     type: String,
     required: true,
   },
-  description: {
+  location: {
     type: String,
     required: true,
   },
-  dateTime: {
+  role: {
     type: String,
+    required: true,
   },
-  bookmarked: {
-    type: Boolean,
+  level: {
+    type: String,
+    required: true,
+  },
+  contract: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
+  language: {
+    type: String,
+    required: true,
   },
 });
 
-const ProductModel = mongoose.model("productData", productSchema);
+const JobModel = mongoose.model("job", jobSchema);
 
 module.exports = {
-  ProductModel,
+  JobModel,
 };
